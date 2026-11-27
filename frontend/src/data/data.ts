@@ -5,26 +5,25 @@
  */
 
 export type Fit = "men" | "women" | "kids";
+
 export type ClothingCategory =
-  | "t-shirt"
-  | "shirt"
-  | "hoodie"
-  | "pants"
-  | "shorts";
-export type ClothingSize = "XS" | "S" | "M" | "L" | "XL" | "XXL";
+    "t-shirt" | "shirt" | "hoodie" | "pants" | "shorts";
+
+export type ClothingSize =
+    "XS" | "S" | "M" | "L" | "XL" | "XXL";
 
 export interface ClothingProduct {
-  id: number;
-  name: string;
-  image: string;
-  fit: Fit;
-  category: ClothingCategory;
-  color: string;
-  description: string;
-  size: ClothingSize;
-  price: number;
-  quantity: number;
-  itemQuantity: number;
+    id: number;
+    name: string;
+    image: string;
+    fit: Fit;
+    category: ClothingCategory;
+    color: string;
+    description: string;
+    size: ClothingSize;
+    price: number;
+    quantity: number;
+    itemQuantity: number;
 }
 
 export const products: ClothingProduct[] = [

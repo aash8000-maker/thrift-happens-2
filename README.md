@@ -1,75 +1,97 @@
-# React + TypeScript + Vite
+# Thrift Happens — Project 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## COMP2013 — Web Programming 2
 
-Currently, two official plugins are available:
+## Project Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Thrift Happens is a full-stack online thrift clothing store developed using React, TypeScript, Express, and MongoDB. The application extends Project 1 by replacing local product data with a MongoDB database and implementing CRUD operations.
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- TypeScript
+- Vite
+- Axios
+- Node.js
+- Express
+- MongoDB Atlas
+- Mongoose
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Display clothing products from MongoDB.
+- Add new clothing products.
+- Edit existing clothing products.
+- Delete clothing products.
+- Validate product information.
+- Display success and error messages.
+- Add products to checkout.
+- Manage available stock quantities.
+- Calculate subtotals and grand totals.
+- Remove products and empty the checkout.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Database Setup
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Create a MongoDB Atlas database.
+2. Create a database named `thriftHappens`.
+3. Create a collection named `clothes`.
+4. Import `backend/data.json` into the collection using MongoDB Compass.
+5. Copy `backend/.env.example` to `backend/.env`.
+6. Replace the placeholder with your MongoDB connection string.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Environment variables:
 
 ```
+MONGODB_URI=YOUR_MONGODB_CONNECTION_STRING
+PORT=3000
+```
+
+## Backend Setup
+
+Open a terminal from the project root:
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+The backend runs at http://localhost:3000.
+
+## Frontend Setup
+
+Open a separate terminal from the project root:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open http://localhost:5173 in your browser.
+
+## API Endpoints
+
+| Method | Endpoint  | Description                    |
+| ------ | --------- | ------------------------------ |
+| GET    | /data     | Retrieve all clothing products |
+| POST   | /data     | Create a clothing product      |
+| PATCH  | /data/:id | Update a clothing product      |
+| DELETE | /data/:id | Delete a clothing product      |
+
+## Checkout
+
+The checkout is managed using React state. Available stock is calculated by subtracting the checkout quantity from the database stock. Removing products or emptying the checkout restores available stock.
+
+Checkout information is not stored in MongoDB. Editing or deleting a product removes its associated checkout entry to prevent outdated product information.
+
+## Project Structure
+
+- `frontend/` — React frontend and components.
+- `backend/` — Express server and database model.
+- `backend/data.json` — Original clothing product data.
+- `backend/.env.example` — Environment variable template.
+
+## Security
+
+Database credentials are stored in a local `.env` file and excluded from GitHub using `.gitignore`.
